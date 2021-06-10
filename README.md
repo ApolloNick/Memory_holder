@@ -1,2 +1,3 @@
-# Memory_holder
-Beginning_in_programming
+# Memory_holder_for_Hillel
+import this - The Zen of Python, by Tim Peters
+import 
