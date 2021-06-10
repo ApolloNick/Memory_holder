@@ -8,5 +8,13 @@ import from __future__ import braces tells us that our chances to create blocks 
 task 4
 install from PyPi module art through installation programm pip #in command line
 from art import *
-tprint("Nick")
+tprint("Nick", "*")
 
+task 5
+x = 5
+y = 1
+print (x, y, sep=" | ")
+print(x+y)
+print(x//y)
+print(x%y)
+print(x^y)
