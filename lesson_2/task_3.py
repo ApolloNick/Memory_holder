@@ -1,9 +1,4 @@
 v = int(input("Enter rider speed: "))
-if v > 0:
-    abs(v)
-if v < 0:
-    -abs(v)
-
 
 t = int(input("Enter time: "))
 s = v / t
