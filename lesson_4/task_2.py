@@ -1,108 +1,69 @@
 import math
 
-def amount_of_entered_numbers():
+
+def data_from_user():
     sequence_of_integer_numbers = 1
-    attempts = -1
-    list_of_attempts = []
+    list_of_data = []
     while sequence_of_integer_numbers != 0:
         sequence_of_integer_numbers = int(input("Enter your integer number for checking: "))
-        attempts += 1
-        list_of_attempts.append(sequence_of_integer_numbers)
-    return attempts
+        list_of_data.append(sequence_of_integer_numbers)
+    list_of_data.pop(-1)
+    return list_of_data
 
 
-def sum_of_numbers():
-    sequence_of_integer_numbers = 1
-    list_of_attempts = []
-    while sequence_of_integer_numbers != 0:
-        sequence_of_integer_numbers = int(input("Enter your integer number for checking: "))
-        list_of_attempts.append(sequence_of_integer_numbers)
-        if sequence_of_integer_numbers == 0:
-            list_of_attempts.pop(-1)
-    sum_of_numbers = sum(list_of_attempts)
-    return sum_of_numbers
+def amount_of_attempts(list_of_data):
+    return "Amount of attempts is", len(list_of_data)
 
 
-def multiply_of_entered():
-    sequence_of_integer_numbers = 1
-    list_of_attempts = []
-    while sequence_of_integer_numbers != 0:
-        sequence_of_integer_numbers = int(input("Enter your integer number for checking: "))
-        list_of_attempts.append(sequence_of_integer_numbers)
-        if sequence_of_integer_numbers == 0:
-            list_of_attempts.pop(-1)
-    multiply_of_numbers = math.prod(list_of_attempts)
-    return multiply_of_numbers
+def sum_of_numbers(list_of_data):
+    return "Sum of numbers is ", sum(list_of_data)
 
 
-def average_value():
-    sequence_of_integer_numbers = 1
-    list_of_attempts = []
-    while sequence_of_integer_numbers != 0:
-        sequence_of_integer_numbers = int(input("Enter your integer number for checking: "))
-        list_of_attempts.append(sequence_of_integer_numbers)
-        if sequence_of_integer_numbers == 0:
-            list_of_attempts.pop(-1)
-    average = sum(list_of_attempts)/len(list_of_attempts)
-    return average
-
-def max_value():
-    sequence_of_integer_numbers = 1
-    attempts = -1
-    list_of_attempts = []
-    while sequence_of_integer_numbers != 0:
-        sequence_of_integer_numbers = int(input("Enter your integer number for checking: "))
-        attempts += 1
-        list_of_attempts.append(sequence_of_integer_numbers)
-        if sequence_of_integer_numbers == 0:
-            list_of_attempts.pop(-1)
-    max_value = max(list_of_attempts)
-    index_of_max_value = list_of_attempts.index(max_value)
-    return [index_of_max_value, max_value]
+def multiply_of_entered(list_of_data):
+    multiply_of_numbers = math.prod(list_of_data)
+    return "Multiply of numbers ", multiply_of_numbers
 
 
-def even_and_odd_numbers():
-    sequence_of_integer_numbers = 1
-    list_of_attempts = []
-    while sequence_of_integer_numbers != 0:
-        sequence_of_integer_numbers = int(input("Enter your integer number for checking: "))
-        list_of_attempts.append(sequence_of_integer_numbers)
-        if sequence_of_integer_numbers == 0:
-            list_of_attempts.pop(-1)
-    odd_numbers = [odd_number for odd_number in list_of_attempts if odd_number % 2 == 1]
+def average_value(list_of_data):
+    average = sum(list_of_data)/len(list_of_data)
+    return "Average value is ", average
+
+def max_value(list_of_data):
+    max_value = max(list_of_data)
+    index_of_max_value = list_of_data.index(max_value)
+    return "Max value ", [index_of_max_value, max_value]
+
+
+def even_and_odd_numbers(list_of_data):
+    odd_numbers = [odd_number for odd_number in list_of_data if odd_number % 2 == 1]
     length_of_odd = len(odd_numbers)
-    even_numbers = len(list_of_attempts) - length_of_odd
+    even_numbers = len(list_of_data) - length_of_odd
     return "Odd numbers: ", length_of_odd, "Even numbers: ", even_numbers
 
 
-def second_of_a_value_number():
-    sequence_of_integer_numbers = 1
-    list_of_attempts = []
-    while sequence_of_integer_numbers != 0:
-        sequence_of_integer_numbers = int(input("Enter your integer number for checking: "))
-        list_of_attempts.append(sequence_of_integer_numbers)
-        if sequence_of_integer_numbers == 0:
-            list_of_attempts.pop(-1)
-    list_of_attempts.sort()
-    second_value = list_of_attempts[-2]
-    return second_value
+def second_of_a_value_number(list_of_data):
+    list_of_data.sort()
+    list_of_data.pop(-1)
+    second_value = max_value(list_of_data)
+    return "The second max value is ", second_value
 
 
-def elements_equal_max_value():
-    sequence_of_integer_numbers = 1
-    list_of_attempts = []
-    while sequence_of_integer_numbers != 0:
-        sequence_of_integer_numbers = int(input("Enter your integer number for checking: "))
-        list_of_attempts.append(sequence_of_integer_numbers)
-        if sequence_of_integer_numbers == 0:
-            list_of_attempts.pop(-1)
-    max_value = max(list_of_attempts)
+def elements_equal_max_value(list_of_data):
+    max_value = max(list_of_data)
     list_of_max_value = []
-    for number in list_of_attempts:
+    for number in list_of_data:
         if number == max_value:
             list_of_max_value.append(number)
-    return len(list_of_max_value)
+    return "Quantity of elements equal max value is ", len(list_of_max_value)
 
 
-print(elements_equal_max_value())
+def main():
+    list_of_nums = data_from_user()
+    function_to_call = [amount_of_attempts, sum_of_numbers, multiply_of_entered, average_value,
+                        max_value, even_and_odd_numbers, second_of_a_value_number, elements_equal_max_value]
+    for func in function_to_call:
+        print(func(list_of_nums))
+
+
+main()
 
