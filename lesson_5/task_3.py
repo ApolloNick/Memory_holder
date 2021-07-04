@@ -8,7 +8,7 @@ def figure_area(choice="triangle"):
     if choice == "square":
         any_line = float(input("Enter any line of a square: "))
         area = any_line ** 2
-    return f"The area of you figure is {area}"
+    return area
 
 
 print(figure_area())

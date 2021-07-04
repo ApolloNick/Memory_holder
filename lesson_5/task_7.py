@@ -1,19 +1,14 @@
-day = int(input("Enter a day: "))
-month = int(input("Enter a month: "))
-year = int(input("Enter a year: "))
+import datetime
+
+created = input("Enter the time to check (small hint day-month-year): ")
 
 
-def is_date(day, month, year):
-    if day < 1 or day > 31:
-        print("False")
-    elif month < 1 or month > 12:
-        print("False")
-    elif year < 1 or year > 9999:
-        print("False")
-    else:
-        print("True")
+def convert_numbers_to_date(date):
+    created_dt = datetime.datetime.strptime(created, "%d-%m-%Y")
+    converted_time = created_dt.strftime("%d-%m-%Y")
+    return converted_time
 
 
-is_date(day, month, year)
+print(convert_numbers_to_date(created))
 
 
