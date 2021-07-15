@@ -17,27 +17,28 @@ if __name__ == '__main__':
 
 def get_data(currency_from_exchange, currency_to_exchange, amount_of_money, start_date):
     start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d")
-    print(['date', 'from', 'to', 'amount', 'rate', 'result'])
+    initial_list = [['date', 'from', 'to', 'amount', 'rate', 'result']]
     while start_date < datetime.datetime.now():
         received_data = requests.get("https://api.exchangerate.host/convert",
                                      params={"from": currency_from_exchange, "to": currency_to_exchange,
                                              "amount": amount_of_money, "date": start_date}).json()
-        print([received_data["date"], received_data["query"]["from"], received_data["query"]["to"],
-              received_data["query"]["amount"], received_data["info"]["rate"], received_data["result"]])
+        built_list = [received_data["date"], received_data["query"]["from"], received_data["query"]["to"],
+                      received_data["query"]["amount"], received_data["info"]["rate"], received_data["result"]]
+        initial_list.append(built_list)
         start_date = start_date + datetime.timedelta(days=1)
-        time.sleep(3)
+        time.sleep(1)
+    for x in initial_list:
+        print(x)
 
 
 def parsing_symbols():
     with open("symbols.json", "r") as file:
         check_symbols = json.load(file)
         list_of_symbols = check_symbols["symbols"]
-    if args.currency_from is not list_of_symbols:
+    if args.currency_from not in list_of_symbols:
         print("Sorry, you enter invalid currency to exchange from")
-    elif args.currency_tu is not list_of_symbols:
+    if args.currency_to not in list_of_symbols:
         print("Sorry, you enter invalid currency to exchange to")
-    elif args.amount < 0:
-        print("We can't exchange the negative value")
 
 
 def main():
