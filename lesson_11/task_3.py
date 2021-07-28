@@ -1,13 +1,9 @@
-name_list = ["ШАЛАШ", "КАЗАК", "ДЕД", "ДОХОД", "13231"]
+name_list = ["ШАЛАШ", "КАЗАК", "ДЕД", "ДОХОД", "13231", "White", "Black", "Gray", "Git", "Push"]
 
 
-def adjust_indention(list_of_data, n):
-    if n > 0:
-        print(str(list_of_data).rjust(n))
-    elif n < 0:
-        print(str(list_of_data).ljust(n))
-    else:
-        print("You don't change an indention")
+def change_place(list_of_data, n):
+    n = -n % len(list_of_data)
+    return list_of_data[n:] + list_of_data[:n]
 
 
-adjust_indention(name_list, 50)
+print(change_place(name_list, -1))

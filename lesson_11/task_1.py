@@ -1,12 +1,12 @@
-def users_input():
-    info = input("Enter text file for writing: ")
-    return info
+def write_file():
+    with open("users_input.txt", 'w') as file:
+        while True:
+            line = input("Enter any line for writing: ")
+            if line == '':
+                break
+            file.write(line + '\n')
 
 
-def write_file(data):
-    with open('users_input.txt', 'w') as file:
-        file.write('\n'.join(data.split()))
-        file.write("\n")
+write_file()
 
 
-write_file(users_input())
