@@ -6,4 +6,4 @@ def change_place(list_of_data, n):
     return list_of_data[n:] + list_of_data[:n]
 
 
-print(change_place(name_list, -1))
+print(change_place(name_list, 6))
