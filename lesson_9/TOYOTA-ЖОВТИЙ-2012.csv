@@ -1,4 +1,4 @@
-D_REG,BRAND,MODEL,COLOR,MAKE_YEAR,FUEL,N_REG_NEW
-06.04.2021,TOYOTA,HILUX,ЖОВТИЙ,2012,ДИЗЕЛЬНЕ ПАЛИВО,КА2961СН
-29.01.2021,TOYOTA,PRIUS V,ЖОВТИЙ,2012,ЕЛЕКТРО АБО БЕНЗИН,АМ8104ЕО
-22.05.2021,TOYOTA,HILUX,ЖОВТИЙ,2012,ДИЗЕЛЬНЕ ПАЛИВО,КА0931СС
+D_REG BRAND MODEL COLOR MAKE_YEAR FUEL N_REG_NEW
+06.04.2021 TOYOTA HILUX ЖОВТИЙ 2012 "ДИЗЕЛЬНЕ ПАЛИВО" КА2961СН
+29.01.2021 TOYOTA "PRIUS V" ЖОВТИЙ 2012 "ЕЛЕКТРО АБО БЕНЗИН" АМ8104ЕО
+22.05.2021 TOYOTA HILUX ЖОВТИЙ 2012 "ДИЗЕЛЬНЕ ПАЛИВО" КА0931СС
