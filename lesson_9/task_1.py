@@ -76,6 +76,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     args_dict = {"brand": args.brand, "color": args.color, "year": args.year,
                  "fuel": args.fuel, "reg_num": args.reg_num}
-    create_csv_file()
+    # create_csv_file()
+print(args.brand)
 
 
