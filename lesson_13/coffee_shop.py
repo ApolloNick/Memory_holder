@@ -1,44 +1,51 @@
 import csv
+from dataclasses import dataclass
 
 
 class Store:
+    """Basic operations of store"""
+
     def __init__(self):
         self.data = []
         self.balance = 0
         self.sell_list = []
 
-    def import_products(self, length=4):
-        with open("inventory.csv", "r+", encoding="UTF-8") as file:
-            csv_reader = csv.reader(file)
-            next(csv_reader)
-            for row in csv_reader:
-                self.data.append(row)
-                if len(self.data) > length:
-                    break
+    def add_product(self, line, amount_of_times=5):
+        self.data.extend([Product(line["Наименование"], line["Тип"], line["Цена"]) for _ in range(amount_of_times)])
         return self.data
 
-    def return_products(self, kind=None):
+    def import_products(self):
+        with open("inventory.csv", "r+", encoding="UTF-8") as file:
+            csv_reader = csv.DictReader(file)
+            next(csv_reader)
+            for line in csv_reader:
+                self.add_product(line)
+        return self.data
+
+    def return_products(self, kind_of_product: str = " ") -> list:
         list_of_products = []
         for line in self.data:
-            if line[1] == kind:
+            if line.kind_of_product == kind_of_product:
                 list_of_products.append(line)
-            else:
+            if line.kind_of_product != kind_of_product:
                 list_of_products.append(line)
         return list_of_products
 
     def overall_sum(self):
-        sum_ = []
+        sum_ = 0
         for line in self.data:
-            sum_.append(int(line[2]))
-        return sum(sum_)
+            sum_ += int(line.price)
+        return sum_
 
-    def sell_product(self, name, kind, price):
-        self.sell_list = [name, kind, price]
-        for line in self.data:
-            if self.sell_list == line:
-                self.data.remove(line)
-                self.balance += int(line[2])
-        return self.data
+    def sell_product(self, name):
+        product_index = 0
+        for i, line in enumerate(self.data):
+            if line.name == name:
+                product_index = i
+        if product_index != 0:
+            self.data.pop(product_index)
+        else:
+            print("No such product in a store")
 
     def count_income(self):
         income_list = []
@@ -51,27 +58,24 @@ class Store:
         return self.balance
 
 
-class Product(Store):
-    def __init__(self, name: str, kind: str, price: str):
-        super().__init__()
-        self.name = name
-        self.kind = kind
-        self.price = price
-        self.balance = 0
-        self.data = []
+@dataclass
+class Product:
+    """Description of product"""
+    name: str
+    kind_of_product: str
+    price: int
 
-    def print(self):
-        display_list = []
-        for line in self.data:
-            if line[0] == self.name and line[1] == self.kind and line[2] == self.price:
-                display_list.append(line)
-        return f"{display_list[0][0]}: {display_list[0][1]}, price: {display_list[0][2]} grn"
+    def __str__(self):
+        return f"{self.name} - {self.kind_of_product}; price: {self.price} grn"
+
+    def __repr__(self):
+        return self.__str__()
 
 
-prod = Product('Earl Grey', 'tea', '25')
+# prod = Product('Earl Grey', 'tea', 25)
 one = Store()
-one.import_products(length=10)
-print(one.sell_product('Earl Grey', 'tea', '25'))
-print(one.get_balance())
-print(one.count_income())
+# print(one.import_products())
+# print(one.return_products())
+# print(one.overall_sum())
+one.sell_product('Доппио')
 
