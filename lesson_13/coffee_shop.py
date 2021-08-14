@@ -42,17 +42,11 @@ class Store:
         for i, line in enumerate(self.data):
             if line.name == name:
                 product_index = i
+                self.balance += int(line.price)
         if product_index != 0:
             self.data.pop(product_index)
         else:
             print("No such product in a store")
-
-    def count_income(self):
-        income_list = []
-        if self.sell_list[1] == "coffee" or self.sell_list[1] == "tea":
-            if income_list != self.sell_list:
-                income_list.append(int(self.sell_list[2]))
-        return income_list
 
     def get_balance(self):
         return self.balance
@@ -74,8 +68,8 @@ class Product:
 
 # prod = Product('Earl Grey', 'tea', 25)
 one = Store()
-# print(one.import_products())
-# print(one.return_products())
-# print(one.overall_sum())
-one.sell_product('Доппио')
+one.import_products()
+print(one.overall_sum())
+one.sell_product("Earl Grey")
+print(one.get_balance())
 
