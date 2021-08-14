@@ -1,95 +1,48 @@
 import random
-from faker import Faker
-faker = Faker()
-
-
-class City:
-    """Description of structure of whole city"""
-
-    def __init__(self):
-        # Как сделать так чтобы добавляло именно по 4 элемента в строку
-        self.structure = []
-        self.population = 0
-        self.count = 0
-
-    def add_street(self, name_of_street: str = " "):
-        if name_of_street == " ":
-            name_of_street = faker.name()
-        amount_of_houses = random.randint(5, 20)
-        self.count += 1
-        return self.structure.extend([name_of_street, amount_of_houses])
-
-    def delete_street(self, name_of_street: str):
-        return self.structure.remove(name_of_street)
-
-    def add_house(self, number_of_house: int = 0):
-        # number_of_house += 1  Почему нельзя сделать учет добавления дома инкрементом?
-        number_of_house = random.randint(1, 10)
-        amount_of_population = random.randint(5, 20)
-        self.population += amount_of_population
-        return self.structure.extend([number_of_house, amount_of_population])
-
-    def delete_house(self, number_of_house: int):
-        return self.structure.pop(number_of_house)
-
-    def fill_up(self):
-        self.add_street()
-        self.add_house()
-        return self.structure
-
-    def count_of_population(self):
-        return self.population
-
-    def column_print(self):
-        for _ in range(self.count):
-            print(str(self.structure[:4]).rjust(50))
-
-
-class Street:
-    """Description of street"""
-    def __init__(self):
-        self.streets = []
-
-    def add_street(self, name_of_street: str = " "):
-        if name_of_street == " ":
-            name_of_street = faker.name()
-        amount_of_houses = random.randint(5, 20)
-        return self.streets.append([name_of_street, amount_of_houses])
-
-    def delete_street(self, name_of_street: str):
-        return self.streets.remove(name_of_street)
-
-    def print_street(self):
-        return self.streets
 
 
 class House:
-    """Description of house"""
-    def __init__(self):
+    def __init__(self, house_id):
+        self.id = house_id
+        self.amount_of_people = random.randint(1, 100)
+
+
+class Street:
+    def __init__(self, street_id):
         self.list_of_houses = []
-        self.population = 0
+        self.street_id = street_id
+        self.fill_up_street()
 
-    def add_house(self, number_of_house: int = 0):
-        if number_of_house == 0:
-            number_of_house = random.randint(5, 20)
-        population = random.randint(5, 20)
-        return self.list_of_houses.append([number_of_house, population])
+    def fill_up_street(self):
+        for i in range(random.randint(5, 20)):
+            self.list_of_houses.append(House(i))
 
-    def delete_house(self, number_of_house: int):
-        return self.list_of_houses.remove(number_of_house)
 
-    def print_houses(self):
-        return self.list_of_houses
+class City:
+    def __init__(self):
+        self.list_of_streets = []
+        self.fill_up_city()
+        self.record_in_order()
+
+    def fill_up_city(self):
+        for i in range(random.randint(3, 10)):
+            self.list_of_streets.append(Street(i))
+
+    def record_in_order(self):
+        with open('example_of_a_city.txt.txt', 'w') as file:
+            self.population = 0
+            name = ["House", "Population"]
+            file.write(f'Street {name[0].rjust(30)} {name[1].rjust(45)}\n')
+            for street in self.list_of_streets:
+                for house in street.list_of_houses:
+                    write_street = f"Street {street.street_id}"
+                    write_house = f"House {house.id}"
+                    people = f"{house.amount_of_people}"
+                    file.write(f'{write_street} {write_house.rjust(30)} {people.rjust(40)}\n')
+                    self.population += house.amount_of_people
 
 
 city_1 = City()
-city_1.fill_up()
-print(city_1.fill_up())
-city_1.column_print()
-
-
-
-
 
 
 
