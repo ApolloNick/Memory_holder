@@ -35,10 +35,8 @@ class City:
             file.write(f'Street {name[0].rjust(30)} {name[1].rjust(45)}\n')
             for street in self.list_of_streets:
                 for house in street.list_of_houses:
-                    write_street = f"Street {street.street_id}"
-                    write_house = f"House {house.id}"
-                    people = f"{house.amount_of_people}"
-                    file.write(f'{write_street} {write_house.rjust(30)} {people.rjust(40)}\n')
+                    info_for_file = [f"Street {street.street_id}", f"House {house.id}", f"{house.amount_of_people}"]
+                    file.write(f'{info_for_file[0]} {info_for_file[1].rjust(30)} {info_for_file[2].rjust(40)}\n')
                     self.population += house.amount_of_people
 
 
