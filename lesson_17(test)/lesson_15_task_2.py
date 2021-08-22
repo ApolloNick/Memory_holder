@@ -11,4 +11,3 @@ def check_tel_number(tel_number: str) -> str:
 
 print(check_tel_number("380502852124"))
 
-

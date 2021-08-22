@@ -13,7 +13,3 @@ def convertor_for_temperatures(amount_of_degrees: int, type_of_system: str):
         return value_celsius, value_kelvin
     else:
         print("You entered invalid value")
-
-
-
-
